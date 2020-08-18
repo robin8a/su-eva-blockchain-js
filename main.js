@@ -38,7 +38,22 @@ class BlockChain {
         this.chain.push(newBlock)
     }
     
-
+    isValidTheBlockChain = () => {
+        for (let index = 1; index < this.chain.length; index++) {
+            const currentBlock = this.chain[index];
+            const previousBlock = this.chain[index-1];
+            
+            if (currentBlock.hash !== currentBlock.calculateHash()) {
+                return false
+            } 
+            
+            if (currentBlock.previosHash !== previousBlock.hash) {
+                return false
+            } 
+        }
+        return true
+    }
+    
 }
 
 letEvaBlockChain =  new BlockChain()
@@ -48,3 +63,6 @@ letEvaBlockChain.addBlock(new Block(2, "04/04/2020", {amount: 10}))
 console.table([letEvaBlockChain])
 console.log({ letEvaBlockChain})
 console.log(JSON.stringify(letEvaBlockChain, null, 4))
+
+
+console.log('Is a valid block chain? ', letEvaBlockChain.isValidTheBlockChain())
