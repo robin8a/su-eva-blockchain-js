@@ -1,4 +1,4 @@
-import sha256 from 'crypto-js/sha256';
+const SHA256 = require('crypto-js/sha256');
 
 class Block {
     constructor(index, timestamp, data, previosHash = ''){
@@ -10,7 +10,7 @@ class Block {
     }
 
     calculateHash() {
-        return sha256(`${this.index}${this.previosHash}${this.timestamp}${JSON.stringify(this.data)}`).toString()
+        return SHA256(`${this.index}${this.previosHash}${this.timestamp}${JSON.stringify(this.data)}`).toString()
     }
 
     
@@ -19,16 +19,16 @@ class Block {
 
 class BlockChain {
     constructor() {
-        this.chain = []
+        this.chain = [this.createGenesisBlock()]
 
     }
 
     createGenesisBlock = () => {
-        return new Block(0, "01/01/2020", "Genesis block", "0")           
+        return new Block(0, "01/01/2020", "Genesis block", "0")
     }
     
     getLatestBlock = () => {
-        return this.chain(this.chain.length - 1)
+        return this.chain[this.chain.length - 1]
     }
     
     addBlock = (newBlock) => {
@@ -38,4 +38,13 @@ class BlockChain {
         this.chain.push(newBlock)
     }
     
+
 }
+
+letEvaBlockChain =  new BlockChain()
+letEvaBlockChain.addBlock(new Block(1, "04/04/2020", {amount: 4}))
+letEvaBlockChain.addBlock(new Block(2, "04/04/2020", {amount: 10}))
+
+console.table([letEvaBlockChain])
+console.log({ letEvaBlockChain})
+console.log(JSON.stringify(letEvaBlockChain, null, 4))
