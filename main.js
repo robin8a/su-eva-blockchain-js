@@ -56,13 +56,19 @@ class BlockChain {
     
 }
 
-letEvaBlockChain =  new BlockChain()
-letEvaBlockChain.addBlock(new Block(1, "04/04/2020", {amount: 4}))
-letEvaBlockChain.addBlock(new Block(2, "04/04/2020", {amount: 10}))
+evaBlockChain =  new BlockChain()
+evaBlockChain.addBlock(new Block(1, "04/04/2020", {amount: 4}))
+evaBlockChain.addBlock(new Block(2, "04/04/2020", {amount: 10}))
 
-console.table([letEvaBlockChain])
-console.log({ letEvaBlockChain})
-console.log(JSON.stringify(letEvaBlockChain, null, 4))
+console.table([evaBlockChain])
+console.log({ evaBlockChain})
+console.log(JSON.stringify(evaBlockChain, null, 4))
 
 
-console.log('Is a valid block chain? ', letEvaBlockChain.isValidTheBlockChain())
+console.log('Is a valid block chain? ', evaBlockChain.isValidTheBlockChain())
+
+evaBlockChain.chain[1].data = {amount: 100}
+console.log('Is a valid block chain? ', evaBlockChain.isValidTheBlockChain())
+
+evaBlockChain.chain[1].previosHash = evaBlockChain.chain[1].calculateHash()
+console.log('Is a valid block chain? ', evaBlockChain.isValidTheBlockChain())
